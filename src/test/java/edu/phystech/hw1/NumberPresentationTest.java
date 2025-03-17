@@ -6,15 +6,40 @@ import org.junit.jupiter.api.Assertions;
 public class NumberPresentationTest {
 
     private static String toBinary(int x) {
-        return "";
+        String res = "";
+        if(x == 0) {
+            return "0";
+        }
+        while (x > 0) {
+            res = (x % 2) + res;
+            x /= 2;
+        }
+        return res;
     }
 
     private static String toOct(int x) {
-        return "";
+        String res = "";
+        if(x == 0) {
+            return "0";
+        }
+        while (x > 0) {
+            res = (x % 8) + res;
+            x /= 8;
+        }
+        return res;
     }
 
     private static String toHex(int x) {
-        return "";
+        String res = "";
+        String digits = "0123456789abcdef";
+        if(x == 0) {
+            return "0";
+        }
+        while (x > 0) {
+            res = digits.charAt(x % 16) + res;
+            x /= 16;
+        }
+        return res;
     }
 
     @Test

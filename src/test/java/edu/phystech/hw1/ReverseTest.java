@@ -7,8 +7,18 @@ import org.junit.jupiter.api.Assertions;
 
 public class ReverseTest {
 
+    private static void Swap(int[] copy, int a, int b) {
+        int tmp = copy[a];
+        copy[a] = copy[b];
+        copy[b] = tmp;
+    }
     private static int[] reverse(int[] nums) {
-        return nums;
+        int[] copy = Arrays.copyOf(nums, nums.length);
+        int size = nums.length;
+        for (int i = 0; i < size/2; i++) {
+            Swap(copy, i, size - 1 - i);
+        }
+        return copy;
     }
 
 
