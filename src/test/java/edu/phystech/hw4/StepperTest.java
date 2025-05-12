@@ -1,4 +1,4 @@
-package edu.phystech.hw4;
+package edu.phystech.hw4.stepper;
 
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -9,7 +9,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import edu.phystech.hw4.stepper.Stepper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -42,10 +41,10 @@ public class StepperTest {
         Stepper stepper = new Stepper();
         ExecutorService executorService = Executors.newFixedThreadPool(10);
         List<Future<?>> futures = IntStream.range(0, 600).mapToObj(i ->
-            executorService.submit(() -> {
-                try {stepper.rightStep();
-                } catch (Exception e) {}
-            })).collect(Collectors.toList());
+                executorService.submit(() -> {
+                    try {stepper.rightStep();
+                    } catch (Exception e) {}
+                })).collect(Collectors.toList());
         boolean isFinished = executorService.awaitTermination(5, TimeUnit.SECONDS);
         Assertions.assertFalse(isFinished);
         futures.forEach(f -> Assertions.assertFalse(f.isDone()));
