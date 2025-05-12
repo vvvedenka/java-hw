@@ -19,9 +19,12 @@ import org.junit.jupiter.api.Test;
  */
 class ConcurrentCounter {
     private long value = 0;
-    void increment() {}
-
-    long getValue() { return 0; }
+    synchronized void increment() {
+        value++;
+    }
+    synchronized long getValue() {
+        return value;
+    }
 }
 
 
@@ -40,8 +43,8 @@ public class ConcurrentCounterTest {
         ConcurrentCounter concurrentCounter = new ConcurrentCounter();
         ExecutorService executorService = Executors.newFixedThreadPool(10);
         List<Callable<Integer>> callableList = IntStream.range(0, 100_000).mapToObj(i -> (Callable<Integer>) () -> {
-                concurrentCounter.increment();
-                return 0;
+            concurrentCounter.increment();
+            return 0;
         }).toList();
         executorService.invokeAll(callableList).forEach(f -> {
             try {

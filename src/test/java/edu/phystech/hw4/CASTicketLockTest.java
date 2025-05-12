@@ -23,6 +23,7 @@ class Counter {
         return value;
     }
 }
+
 public class CASTicketLockTest {
 
     @Test
